@@ -1,0 +1,15 @@
+{
+  "name": "@riddance/create",
+  "version": "0.0.1",
+  "type": "module",
+  "engines": {
+    "node": ">=16"
+  },
+  "files": [
+    "*.js"
+  ],
+  "scripts": {
+    "prepare": "tsc",
+    "watch": "watch"
+  }
+}
