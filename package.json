@@ -1,6 +1,6 @@
 {
   "name": "create-riddance",
-  "version": "0.0.4",
+  "version": "0.0.7",
   "type": "module",
   "license": "MIT",
   "engines": {
@@ -17,6 +17,6 @@
     "start": "watch"
   },
   "devDependencies": {
-    "@riddance/env": "0.2.3"
+    "@riddance/env": "0.2.4"
   }
 }
