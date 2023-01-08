@@ -1,5 +1,30 @@
 #!/usr/bin/env node
 
-console.log(process.cwd())
-console.log(process.argv)
-console.log(process.env)
+import { execSync } from 'node:child_process'
+import { randomUUID } from 'node:crypto'
+import { mkdir, rm } from 'node:fs/promises'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
+
+const [major] = process.versions.node.split('.')
+if (Number(major) < 16) {
+    console.error(
+        `You are running Node ${process.versions.node}.\nRiddance requires Node 16 or higher.\nPlease update your version of Node.`,
+    )
+    process.exit(1)
+}
+
+const workDir = join(tmpdir(), 'riddance', 'create', randomUUID())
+await mkdir(workDir, { recursive: true })
+try {
+    execSync('npm init -y', { cwd: workDir, stdio: 'inherit' })
+    execSync('npm install --progress false @riddance/init@latest', {
+        cwd: workDir,
+        stdio: 'inherit',
+    })
+    execSync(`node "${join(workDir, 'node_modules', '@riddance', 'init', 'index.js')}"`, {
+        stdio: 'inherit',
+    })
+} finally {
+    await rm(workDir, { recursive: true, force: true })
+}
