@@ -1,15 +1,20 @@
 {
-  "name": "@riddance/create",
+  "name": "create-riddance",
   "version": "0.0.1",
   "type": "module",
+  "license": "MIT",
   "engines": {
     "node": ">=16"
   },
   "files": [
-    "*.js"
+    "create-riddance.js"
   ],
+  "bin": "create-riddance.js",
   "scripts": {
-    "prepare": "tsc",
-    "watch": "watch"
+    "prepack": "node node_modules/@riddance/env/bin/build.js",
+    "start": "watch"
+  },
+  "devDependencies": {
+    "@riddance/env": "0.2.3"
   }
 }
