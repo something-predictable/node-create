@@ -2,7 +2,7 @@
 
 import { execSync } from 'node:child_process'
 import { randomUUID } from 'node:crypto'
-import { mkdir, rm } from 'node:fs/promises'
+import { mkdir, rm, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 
@@ -17,7 +17,7 @@ if (Number(major) < 16) {
 const workDir = join(tmpdir(), 'riddance', 'create', randomUUID())
 await mkdir(workDir, { recursive: true })
 try {
-    execSync('npm init -y', { cwd: workDir, stdio: 'inherit' })
+    await writeFile(join(workDir, 'package.json'), '{}')
     execSync('npm install --progress false @riddance/init@latest', {
         cwd: workDir,
         stdio: 'inherit',
