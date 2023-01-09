@@ -14,6 +14,8 @@ if (Number(major) < 16) {
     process.exit(1)
 }
 
+const [, , args] = process.argv
+
 const workDir = join(tmpdir(), 'riddance', 'create', randomUUID())
 await mkdir(workDir, { recursive: true })
 try {
@@ -22,9 +24,15 @@ try {
         cwd: workDir,
         stdio: 'inherit',
     })
-    execSync(`node "${join(workDir, 'node_modules', '@riddance', 'init', 'index.js')}"`, {
-        stdio: 'inherit',
-    })
+    execSync(
+        'node' +
+            [join(workDir, 'node_modules', '@riddance', 'init', 'index.js'), ...(args ?? [])]
+                .map(arg => ` "${arg}"`)
+                .join(''),
+        {
+            stdio: 'inherit',
+        },
+    )
 } finally {
     await rm(workDir, { recursive: true, force: true })
 }
