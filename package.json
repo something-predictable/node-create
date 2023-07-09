@@ -1,10 +1,10 @@
 {
   "name": "create-riddance",
-  "version": "0.0.8",
+  "version": "0.1.0",
   "type": "module",
   "license": "MIT",
   "engines": {
-    "node": ">=16"
+    "node": ">=18"
   },
   "files": [
     "bin/bootstrap.js"
@@ -13,10 +13,12 @@
     "create-riddance": "./bin/bootstrap.js"
   },
   "scripts": {
-    "prepack": "node node_modules/@riddance/env/bin/build.js",
-    "start": "watch"
+    "prepack": "riddance-build",
+    "start": "riddance-watch",
+    "prepublishOnly": "riddance-prepublish",
+    "postpublish": "riddance-sync"
   },
   "devDependencies": {
-    "@riddance/env": "0.2.4"
+    "@riddance/env": "0.4.1"
   }
 }

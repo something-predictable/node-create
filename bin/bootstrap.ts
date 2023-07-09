@@ -7,9 +7,9 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 
 const [major] = process.versions.node.split('.')
-if (Number(major) < 16) {
+if (Number(major) < 18) {
     console.error(
-        `You are running Node ${process.versions.node}.\nRiddance requires Node 16 or higher.\nPlease update your version of Node.`,
+        `You are running Node ${process.versions.node}.\nRiddance requires Node 18 or higher.\nPlease update your version of Node.`,
     )
     process.exit(1)
 }
