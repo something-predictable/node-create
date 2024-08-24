@@ -6,10 +6,10 @@ import { mkdir, rm, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 
-const [major] = process.versions.node.split('.')
-if (Number(major) < 20) {
+const [major, minor] = process.versions.node.split('.')
+if (Number(major) < 20 || Number(minor) < 10) {
     console.error(
-        `You are running Node ${process.versions.node}.\nRiddance requires Node 20 or higher.\nPlease update your version of Node.`,
+        `You are running Node ${process.versions.node}.\nRiddance requires Node 20.10 or higher.\nPlease update your version of Node.`,
     )
     process.exit(1)
 }
