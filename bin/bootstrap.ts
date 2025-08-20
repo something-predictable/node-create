@@ -7,14 +7,15 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 
 const [major, minor] = process.versions.node.split('.')
-if (Number(major) < 20 || Number(minor) < 10) {
+const majorNumber = Number(major)
+if ((majorNumber === 22 && Number(minor) < 14) || majorNumber < 22) {
     console.error(
-        `You are running Node ${process.versions.node}.\nRiddance requires Node 20.10 or higher.\nPlease update your version of Node.`,
+        `You are running Node ${process.versions.node}.\nRiddance requires Node 22.14 or higher.\nPlease update your version of Node.`,
     )
     process.exit(1)
 }
 
-const [, , args] = process.argv
+const [, , ...args] = process.argv
 
 const workDir = join(tmpdir(), 'riddance', 'create', randomUUID())
 await mkdir(workDir, { recursive: true })
@@ -26,7 +27,7 @@ try {
     })
     execSync(
         'node' +
-            [join(workDir, 'node_modules', '@riddance', 'init', 'index.js'), ...(args ?? [])]
+            [join(workDir, 'node_modules', '@riddance', 'init', 'index.js'), ...args]
                 .map(arg => ` "${arg}"`)
                 .join(''),
         {
