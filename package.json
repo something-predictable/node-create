@@ -1,10 +1,10 @@
 {
   "name": "create-riddance",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "type": "module",
   "license": "MIT",
   "engines": {
-    "node": ">=22"
+    "node": ">=24"
   },
   "files": [
     "bin/bootstrap.js"
@@ -19,6 +19,6 @@
     "postpublish": "riddance-sync"
   },
   "devDependencies": {
-    "@riddance/env": "0.9.0"
+    "@riddance/env": "0.10.0"
   }
 }

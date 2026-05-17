@@ -6,11 +6,11 @@ import { mkdir, rm, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 
-const [major, minor] = process.versions.node.split('.')
+const [major] = process.versions.node.split('.')
 const majorNumber = Number(major)
-if ((majorNumber === 22 && Number(minor) < 14) || majorNumber < 22) {
+if (majorNumber < 24) {
     console.error(
-        `You are running Node ${process.versions.node}.\nRiddance requires Node 22.14 or higher.\nPlease update your version of Node.`,
+        `You are running Node ${process.versions.node}.\nRiddance requires Node 24 or higher.\nPlease update your version of Node.`,
     )
     process.exit(1)
 }
